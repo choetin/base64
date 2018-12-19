@@ -1,3 +1,6 @@
+#include <stddef.h>
+#include "../include/libbase64.h"
+
 // This code makes some assumptions on the implementation of 
 // base64_stream_encode_init(), base64_stream_encode() and base64_stream_decode().
 // Basically these assumptions boil down to that when breaking the src into
@@ -11,7 +14,7 @@
 // 3) the state flag can be discarded after base64_stream_encode() and
 //    base64_stream_decode() on the parts.
 
-static inline void
+static void
 base64_encode_openmp
 	( const char	*src
 	, size_t	 srclen
@@ -73,7 +76,7 @@ base64_encode_openmp
 	*outlen = sum;
 }
 
-static inline int
+static int
 base64_decode_openmp
 	( const char	*src
 	, size_t	 srclen

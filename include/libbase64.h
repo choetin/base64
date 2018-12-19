@@ -30,7 +30,8 @@ struct base64_state {
  * to *out without trailing zero. Output length in bytes is written to *outlen.
  * The buffer in `out` has been allocated by the caller and is at least 4/3 the
  * size of the input. See above for `flags`; set to 0 for default operation: */
-void base64_encode
+_declspec(dllexport)
+void _cdecl base64_encode
 	( const char		*src
 	, size_t		 srclen
 	, char			*out
@@ -40,7 +41,8 @@ void base64_encode
 
 /* Call this before calling base64_stream_encode() to init the state. See above
  * for `flags`; set to 0 for default operation: */
-void base64_stream_encode_init
+_declspec(dllexport)
+void _cdecl base64_stream_encode_init
 	( struct base64_state	*state
 	, int			 flags
 	) ;
@@ -50,7 +52,8 @@ void base64_stream_encode_init
  * must be at least 4/3 the size of the in-buffer, but take some margin. Places
  * the number of new bytes written into `outlen` (which is set to zero when the
  * function starts). Does not zero-terminate or finalize the output. */
-void base64_stream_encode
+_declspec(dllexport)
+void _cdecl base64_stream_encode
 	( struct base64_state	*state
 	, const char		*src
 	, size_t		 srclen
@@ -62,7 +65,8 @@ void base64_stream_encode
  * Adds the required end-of-stream markers if appropriate. `outlen` is modified
  * and will contain the number of new bytes written at `out` (which will quite
  * often be zero). */
-void base64_stream_encode_final
+_declspec(dllexport)
+void _cdecl base64_stream_encode_final
 	( struct base64_state	*state
 	, char			*out
 	, size_t		*outlen
@@ -72,7 +76,8 @@ void base64_stream_encode_final
  * to *out without trailing zero. Output length in bytes is written to *outlen.
  * The buffer in `out` has been allocated by the caller and is at least 3/4 the
  * size of the input. See above for `flags`, set to 0 for default operation: */
-int base64_decode
+_declspec(dllexport)
+int _cdecl base64_decode
 	( const char		*src
 	, size_t		 srclen
 	, char			*out
@@ -82,7 +87,8 @@ int base64_decode
 
 /* Call this before calling base64_stream_decode() to init the state. See above
  * for `flags`; set to 0 for default operation: */
-void base64_stream_decode_init
+_declspec(dllexport)
+void _cdecl base64_stream_decode_init
 	( struct base64_state	*state
 	, int			 flags
 	) ;
@@ -95,7 +101,8 @@ void base64_stream_decode_init
  * well, and 0 if a decoding error was found, such as an invalid character.
  * Returns -1 if the chosen codec is not included in the current build. Used by
  * the test harness to check whether a codec is available for testing. */
-int base64_stream_decode
+_declspec(dllexport)
+int _cdecl base64_stream_decode
 	( struct base64_state	*state
 	, const char		*src
 	, size_t		 srclen
