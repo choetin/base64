@@ -4,14 +4,14 @@ CFLAGS += -std=c99 -O3 -Wall -Wextra -pedantic
 OBJCOPY ?= objcopy
 
 OBJS = \
-  lib/arch/avx2/codec.o \
-  lib/arch/generic/codec.o \
-  lib/arch/neon32/codec.o \
-  lib/arch/neon64/codec.o \
-  lib/arch/ssse3/codec.o \
-  lib/arch/sse41/codec.o \
-  lib/arch/sse42/codec.o \
-  lib/arch/avx/codec.o \
+  lib/arch/avx2/codec_avx2.o \
+  lib/arch/generic/codec_plain.o \
+  lib/arch/neon32/codec_neon32.o \
+  lib/arch/neon64/codec_neon64.o \
+  lib/arch/ssse3/codec_ssse3.o \
+  lib/arch/sse41/codec_sse41.o \
+  lib/arch/sse42/codec_sse42.o \
+  lib/arch/avx/codec_avx.o \
   lib/lib.o \
   lib/codec_choose.o
 
@@ -86,13 +86,13 @@ $(OBJS): lib/config.h
 
 lib/lib.o: lib/tables.h
 
-lib/arch/avx2/codec.o:   CFLAGS += $(AVX2_CFLAGS)
-lib/arch/neon32/codec.o: CFLAGS += $(NEON32_CFLAGS)
-lib/arch/neon64/codec.o: CFLAGS += $(NEON64_CFLAGS)
-lib/arch/ssse3/codec.o:  CFLAGS += $(SSSE3_CFLAGS)
-lib/arch/sse41/codec.o:  CFLAGS += $(SSE41_CFLAGS)
-lib/arch/sse42/codec.o:  CFLAGS += $(SSE42_CFLAGS)
-lib/arch/avx/codec.o:    CFLAGS += $(AVX_CFLAGS)
+lib/arch/avx2/codec_avx2.o:   CFLAGS += $(AVX2_CFLAGS)
+lib/arch/neon32/codec_neon32.o: CFLAGS += $(NEON32_CFLAGS)
+lib/arch/neon64/codec_neon64.o: CFLAGS += $(NEON64_CFLAGS)
+lib/arch/ssse3/codec_ssse3.o:  CFLAGS += $(SSSE3_CFLAGS)
+lib/arch/sse41/codec_sse41.o:  CFLAGS += $(SSE41_CFLAGS)
+lib/arch/sse42/codec_sse42.o:  CFLAGS += $(SSE42_CFLAGS)
+lib/arch/avx/codec_avx.o:    CFLAGS += $(AVX_CFLAGS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
